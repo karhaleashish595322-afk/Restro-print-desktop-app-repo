@@ -10,6 +10,12 @@ let tray = null;
 const expressApp = express();
 const activePrintWindows = new Set();
 
+// Allow Private Network Access (required by Chrome for public sites hitting localhost)
+expressApp.use((req, res, next) => {
+  res.header('Access-Control-Allow-Private-Network', 'true');
+  next();
+});
+
 expressApp.use(cors({
   origin: function (origin, callback) {
     callback(null, true);
