@@ -10,7 +10,12 @@ let tray = null;
 const expressApp = express();
 const activePrintWindows = new Set();
 
-expressApp.use(cors());
+expressApp.use(cors({
+  origin: function (origin, callback) {
+    callback(null, true);
+  },
+  credentials: true
+}));
 expressApp.use(express.json({ limit: '10mb' }));
 
 // Express API
